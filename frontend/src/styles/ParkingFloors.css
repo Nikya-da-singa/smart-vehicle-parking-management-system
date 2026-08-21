@@ -1,0 +1,100 @@
+/* ==========================================================================
+   PARKING FLOORS STYLES
+   ========================================================================== */
+
+.floors-header-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.floors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 22px;
+}
+
+.floor-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.floor-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.4), var(--glow-primary);
+}
+
+.floor-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.floor-badge-id {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.floor-level-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.floor-level-title span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.floor-level-title strong {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1;
+}
+
+.floor-capacity-box {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.floor-capacity-box .cap-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.floor-capacity-box .cap-val {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #38BDF8;
+}
+
+.floor-card-actions {
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 16px;
+}

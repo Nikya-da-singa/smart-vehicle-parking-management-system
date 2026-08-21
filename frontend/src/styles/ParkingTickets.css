@@ -1,0 +1,124 @@
+/* ==========================================================================
+   PARKING TICKETS STYLES
+   ========================================================================== */
+
+.tickets-top-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.ticket-entry-card {
+  padding: 24px;
+  margin-bottom: 28px;
+  border-left: 4px solid var(--primary);
+}
+
+.ticket-entry-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+@media (max-width: 860px) {
+  .ticket-entry-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tickets List Grid */
+.tickets-grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* Digital Ticket Receipt Card */
+.digital-ticket-card {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal);
+}
+
+.digital-ticket-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: var(--shadow-md);
+}
+
+.digital-ticket-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #334155 0, #334155 8px, transparent 8px, transparent 16px);
+}
+
+.ticket-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--border-medium);
+}
+
+.ticket-id-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #818CF8;
+}
+
+.ticket-body-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.ticket-detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.ticket-detail-item .lbl {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ticket-detail-item .val {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.ticket-footer-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.ticket-amount-pill {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #34D399;
+}
