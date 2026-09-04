@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ParkFlow — Full Stack Project Master Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
+
+  @page {
+    size: A4;
+    margin: 16mm 16mm 18mm 16mm;
+    @bottom-right {
+      content: counter(page);
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1e293b;
+    background: #ffffff;
+    line-height: 1.6;
+    font-size: 13px;
+  }
+
+  .header-cover {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #31104b 100%);
+    color: #ffffff;
+    padding: 28px 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(139, 92, 246, 0.3);
+    border: 1px solid rgba(167, 139, 250, 0.4);
+    color: #c4b5fd;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  .header-cover h1 {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    color: #ffffff;
+  }
+
+  .header-cover p {
+    font-size: 13.5px;
+    color: #cbd5e1;
+    max-width: 95%;
+  }
+
+  .url-bar {
+    margin-top: 18px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .url-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .url-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    color: #94a3b8;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .url-value a {
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 12px;
+    word-break: break-all;
+  }
+
+  .url-value a:hover {
+    text-decoration: underline;
+  }
+
+  h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 24px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #334155;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    page-break-after: avoid;
+  }
+
+  p, li {
+    color: #334155;
+    margin-bottom: 8px;
+  }
+
+  ul, ol {
+    margin-left: 20px;
+    margin-bottom: 12px;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  .card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    page-break-inside: avoid;
+  }
+
+  .card-highlight {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-left: 4px solid #16a34a;
+  }
+
+  .card-blue {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-left: 4px solid #2563eb;
+  }
+
+  .card-purple {
+    background: #faf5ff;
+    border: 1px solid #e9d5ff;
+    border-left: 4px solid #9333ea;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px 0;
+    font-size: 12px;
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid #cbd5e1;
+  }
+
+  th {
+    background: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  tr:nth-child(even) {
+    background: #f8fafc;
+  }
+
+  pre, code {
+    font-family: 'Fira Code', monospace;
+  }
+
+  pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 11px;
+    overflow-x: auto;
+    margin: 10px 0 14px 0;
+    line-height: 1.45;
+    page-break-inside: avoid;
+  }
+
+  code {
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 11.5px;
+    border: 1px solid #e2e8f0;
+  }
+
+  pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border: none;
+  }
+
+  .diagram {
+    font-family: 'Fira Code', monospace;
+    background: #1e293b;
+    color: #38bdf8;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 10.5px;
+    line-height: 1.25;
+    margin: 10px 0;
+    page-break-inside: avoid;
+    white-space: pre;
+  }
+
+  .qa-box {
+    margin-bottom: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+
+  .qa-q {
+    background: #f1f5f9;
+    padding: 9px 14px;
+    font-weight: 700;
+    color: #0f172a;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 12.5px;
+  }
+
+  .qa-a {
+    padding: 10px 14px;
+    background: #ffffff;
+    font-size: 12px;
+    color: #334155;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= COVER / HEADER ================= -->
+<div class="header-cover">
+  <span class="badge">Full Stack Enterprise Project</span>
+  <h1>🚗 ParkFlow — Smart Vehicle Parking Management System</h1>
+  <p>Comprehensive Architectural, Technical, and Interview Defense Reference Guide</p>
+
+  <div class="url-bar">
+    <div class="url-item">
+      <span class="url-label">🌐 Live Production Web App</span>
+      <span class="url-value"><a href="https://smart-vehicle-parking-management-sy-lake.vercel.app" target="_blank">smart-vehicle-parking-management-sy-lake.vercel.app</a></span>
+    </div>
+    <div class="url-item">
+      <span class="url-label">⚙️ Live Backend REST API</span>
+      <span class="url-value"><a href="https://parkflow-backend-5xfy.onrender.com" target="_blank">parkflow-backend-5xfy.onrender.com</a></span>
+    </div>
+    <div class="url-item" style="grid-column: span 2;">
+      <span class="url-label">📂 GitHub Source Code Repository</span>
+      <span class="url-value"><a href="https://github.com/Nikya-da-singa/smart-vehicle-parking-management-system" target="_blank">github.com/Nikya-da-singa/smart-vehicle-parking-management-system</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SECTION 1: ELEVATOR PITCH ================= -->
+<h2>⚡ 1. The 30-Second Elevator Pitch</h2>
+<div class="card card-purple">
+  <p><strong>How to introduce your project to recruiters or professors:</strong></p>
+  <p><em>"I designed and deployed <strong>ParkFlow</strong>, an automated Smart Vehicle Parking Management System that streamlines vehicle entry/exit, parking slot allocations, digital ticketing, and revenue analytics. The backend is built with <strong>Java 21 & Spring Boot</strong> with <strong>JWT-secured REST APIs</strong> and <strong>Spring Data JPA</strong>. The frontend is a modern, responsive <strong>React 19 single-page application built on Vite</strong> with dynamic telemetry charts. The entire architecture is containerized with <strong>Docker</strong> and live in production on <strong>Vercel</strong>, <strong>Render</strong>, and <strong>TiDB Cloud MySQL</strong>."</em></p>
+</div>
+
+<!-- ================= SECTION 2: PROBLEM & SOLUTION ================= -->
+<h2>🎯 2. Problem Statement & Real-World Value</h2>
+<div class="card">
+  <h3>The Problem</h3>
+  <ul>
+    <li><strong>Manual Bottlenecks:</strong> Traditional parking relies on physical paper slips, manual fee calculations, and human attendants, causing entry/exit congestion.</li>
+    <li><strong>Space Inefficiencies:</strong> Motorists circle parking floors blindly due to lack of visibility into slot availability by vehicle category.</li>
+    <li><strong>Revenue Leakage:</strong> Inaccurate tracking of exact timestamps and manual cash handling leads to accounting discrepancies.</li>
+  </ul>
+  <h3 style="margin-top: 10px;">The ParkFlow Solution</h3>
+  <ul>
+    <li><strong>Automated Slot Allocation:</strong> Real-time categorization of slots (<code>AVAILABLE</code>, <code>OCCUPIED</code>, <code>MAINTENANCE</code>) mapped against vehicle types (<code>BIKE</code>, <code>CAR</code>, <code>TRUCK</code>).</li>
+    <li><strong>Digital Timestamped Ticketing:</strong> Millisecond-accurate digital ticket generation and tracking.</li>
+    <li><strong>Dynamic Tariff Engine:</strong> Instant automated fee computation based on duration and vehicle-type hourly rates.</li>
+    <li><strong>Actionable Business Intelligence:</strong> Real-time occupancy gauges, vehicle type distribution, and revenue trends powered by Recharts.</li>
+  </ul>
+</div>
+
+<!-- ================= SECTION 3: SYSTEM ARCHITECTURE ================= -->
+<h2>🏗️ 3. System Architecture & Data Flow</h2>
+<div class="diagram">
++-----------------------------------------------------------------------+
+|                       Client Browser / Mobile                         |
+|             React 19 + Vite SPA (Hosted on Vercel CDN)                |
++-----------------------------------┬-----------------------------------+
+                                    | HTTPS / JSON (Bearer JWT)
+                                    v
++-----------------------------------------------------------------------+
+|                    Spring Boot Backend (on Render)                    |
+|                                                                       |
+|  [Security Filter Chain]  --> Validates JWT & BCrypt Passwords        |
+|  [REST Controllers]       --> Auth, Floors, Slots, Tickets, Analytics |
+|  [Service Layer]          --> Slot Allocation & Dynamic Tariff Logic  |
+|  [Spring Data JPA / ORM]  --> Hibernate Type-safe DB Transactions     |
++-----------------------------------┬-----------------------------------+
+                                    | MySQL JDBC over TLS 1.2/1.3
+                                    v
++-----------------------------------------------------------------------+
+|               TiDB Cloud Serverless (Distributed MySQL 8)             |
+|        Users | Parking Floors | Parking Slots | Vehicles | Tickets    |
++-----------------------------------------------------------------------+
+</div>
+
+<div class="page-break"></div>
+
+<!-- ================= SECTION 4: TECH STACK ================= -->
+<h2>💻 4. Technology Stack & Design Decisions</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Technologies Used</th>
+      <th>Why This Choice?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Frontend UI</strong></td>
+      <td>React 19, Vite, React Router v7</td>
+      <td>Lightning-fast SPA navigation, zero page-reloads, instant Vite HMR builds.</td>
+    </tr>
+    <tr>
+      <td><strong>Styling & Visuals</strong></td>
+      <td>Vanilla CSS, Lucide-React, Recharts</td>
+      <td>Dark glassmorphism theme, zero runtime CSS bloat, responsive telemetry charts.</td>
+    </tr>
+    <tr>
+      <td><strong>Backend API</strong></td>
+      <td>Java 21, Spring Boot 3, Maven</td>
+      <td>Enterprise reliability, type-safety, robust dependency injection and scalability.</td>
+    </tr>
+    <tr>
+      <td><strong>Security</strong></td>
+      <td>Spring Security 6, JWT (jjwt), BCrypt</td>
+      <td>Stateless authorization, zero session memory overhead, salted password hashing.</td>
+    </tr>
+    <tr>
+      <td><strong>ORM / Database</strong></td>
+      <td>Spring Data JPA, Hibernate, TiDB Cloud</td>
+      <td>Clean repository pattern, ACID transaction guarantees, serverless MySQL 8 compatibility.</td>
+    </tr>
+    <tr>
+      <td><strong>DevOps & Cloud</strong></td>
+      <td>Docker (Alpine JRE), Render, Vercel</td>
+      <td>Multi-stage container builds (~250MB size), automated CI/CD edge deployment with HTTPS.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ================= SECTION 5: DATABASE SCHEMA ================= -->
+<h2>🗄️ 5. Database Design & Entity Relationships (ER Model)</h2>
+<div class="diagram">
+ [ USERS ] (id, username, email, password_hash, role)
+     | 1
+     | N
+ [ VEHICLES ] (id, license_plate, vehicle_type, owner_name, contact)
+     | 1
+     | N
+ [ PARKING_TICKETS ] (id, ticket_number, entry_time, exit_time, amount, status)
+     | N
+     | 1
+ [ PARKING_SLOTS ] (id, slot_number, slot_type, status)
+     | N
+     | 1
+ [ PARKING_FLOORS ] (id, floor_number, floor_name, capacity, status)
+</div>
+
+<div class="card">
+  <h3>Key Relational Rules:</h3>
+  <ul>
+    <li><strong>ParkingFloor &harr; ParkingSlot (1-to-N):</strong> Each floor has multiple designated slots. Slot numbers are unique per facility.</li>
+    <li><strong>Vehicle &harr; ParkingTicket (1-to-N):</strong> A vehicle maintains complete parking history, but can have only <strong>1 <code>ACTIVE</code> ticket</strong> at a time.</li>
+    <li><strong>ParkingSlot &harr; ParkingTicket (1-to-N):</strong> A slot can only be linked to <strong>1 <code>ACTIVE</code> ticket</strong> when marked <code>OCCUPIED</code>.</li>
+    <li><strong>User:</strong> Supports Role-Based Access Control (<code>ADMIN</code>, <code>OPERATOR</code>, <code>USER</code>).</li>
+  </ul>
+</div>
+
+<!-- ================= SECTION 6: CORE BUSINESS LOGIC ================= -->
+<h2>⚙️ 6. Core Business Logic & Algorithms</h2>
+
+<h3>1. Dynamic Parking Fee Calculation Algorithm</h3>
+<pre><code>// Duration calculation & Ceiling Rounding
+long minutes = Duration.between(entryTime, exitTime).toMinutes();
+long hours = minutes / 60;
+if (minutes % 60 > 0 || hours == 0) {
+    hours++; // Any fraction of an hour is charged as a full hour
+}
+
+// Vehicle-specific hourly tariffs
+double ratePerHour = switch (vehicle.getVehicleType().toUpperCase()) {
+    case "BIKE"  -> 20.0;  // ₹20/hr
+    case "CAR"   -> 50.0;  // ₹50/hr
+    case "TRUCK" -> 100.0; // ₹100/hr
+    default      -> 30.0;
+};
+
+double totalAmount = hours * ratePerHour;
+</code></pre>
+
+<h3>2. Vehicle Entry & Slot Allocation State Machine</h3>
+<pre><code>Vehicle (Check if already parked) 
+   &rarr; Find Available Slot matching Vehicle Type (e.g. CAR &rarr; CAR slot)
+   &rarr; Slot status updated from AVAILABLE &rarr; OCCUPIED
+   &rarr; Vehicle status updated to PARKED
+   &rarr; New Ticket generated with status ACTIVE & Timestamped Entry
+</code></pre>
+
+<div class="page-break"></div>
+
+<!-- ================= SECTION 7: INTERVIEW Q&A ================= -->
+<h2>🎯 7. Top 10 Technical Interview Questions & Model Answers</h2>
+
+<div class="qa-box">
+  <div class="qa-q">Q1: Can you walk me through the end-to-end architecture of your system?</div>
+  <div class="qa-a">"The system follows a decoupled, three-tier architecture: A React 19 single-page application on the frontend communicates via Axios with a Spring Boot 3 REST backend. The backend implements a layered pattern (Controller &rarr; Service &rarr; Repository &rarr; Entity). All incoming requests pass through a Spring Security JWT filter. Business logic handles ticket generation, slot state changes, and tariff computation, persisting data into a TiDB Cloud MySQL database over TLS."</div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-q">Q2: How did you implement security and user authentication?</div>
+  <div class="qa-a">"I implemented stateless JWT authentication. Passwords are encrypted using BCrypt with salt before storage. Upon successful login, the server issues an HMAC-SHA256 signed JWT containing the user identity and role. The client stores this in localStorage and sends it in the Authorization header. A custom <code>JwtAuthenticationFilter</code> intercepts incoming requests, validates token integrity, and populates Spring's <code>SecurityContextHolder</code>."</div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-q">Q3: How do you prevent race conditions if two cars try to book the same slot simultaneously?</div>
+  <div class="qa-a">"In <code>ParkingTicketService</code>, slot selection and reservation are wrapped in an atomic database transaction (<code>@Transactional</code>). In high-concurrency enterprise setups, we utilize optimistic locking via JPA <code>@Version</code> columns or pessimistic row locks (<code>SELECT FOR UPDATE</code>) on <code>ParkingSlot</code> to prevent double-booking."</div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-q">Q4: Why did you use TiDB Cloud instead of standard local MySQL?</div>
+  <div class="qa-a">"TiDB Cloud provides a serverless, MySQL 8-compatible distributed SQL database that is accessible from anywhere over secure TLS. It eliminates the need to maintain database servers on local machines, provides automatic high-availability, auto-scaling, and allowed our cloud-hosted Spring Boot backend on Render to connect seamlessly in production."</div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-q">Q5: What challenges did you encounter during cloud deployment and how did you resolve them?</div>
+  <div class="qa-a">"Two main challenges: First, Hibernate failed to automatically detect the MySQL dialect on a fresh cloud instance without metadata; I resolved this by explicitly configuring <code>MySQLDialect</code> in <code>application.properties</code>. Second, Cross-Origin Resource Sharing (CORS) between our Vercel frontend and Render backend was resolved by configuring a dynamic <code>CorsConfigurationSource</code> in Spring Security allowing verified origins."</div>
+</div>
+
+<div class="qa-box">
+  <div class="qa-q">Q6: What features would you implement in Phase 2?</div>
+  <div class="qa-a">"1. Automatic Number Plate Recognition (ANPR) using computer vision camera feeds.<br>2. Razorpay/Stripe payment gateway integration for QR code-based exit payments.<br>3. IoT ultrasonic slot sensor integration broadcasting live states over WebSockets.<br>4. EV charging slot reservation with power consumption billing."</div>
+</div>
+
+<!-- ================= SECTION 8: QUICK REFERENCE ================= -->
+<h2>📌 8. Project Quick Reference Card</h2>
+<div class="card card-highlight">
+  <table>
+    <tr>
+      <td><strong>Live Frontend URL</strong></td>
+      <td><a href="https://smart-vehicle-parking-management-sy-lake.vercel.app">https://smart-vehicle-parking-management-sy-lake.vercel.app</a></td>
+    </tr>
+    <tr>
+      <td><strong>Live Backend API</strong></td>
+      <td><a href="https://parkflow-backend-5xfy.onrender.com">https://parkflow-backend-5xfy.onrender.com</a></td>
+    </tr>
+    <tr>
+      <td><strong>Source Code</strong></td>
+      <td><a href="https://github.com/Nikya-da-singa/smart-vehicle-parking-management-system">https://github.com/Nikya-da-singa/smart-vehicle-parking-management-system</a></td>
+    </tr>
+    <tr>
+      <td><strong>Tariff Rates</strong></td>
+      <td>Bike: ₹20/hr | Car: ₹50/hr | Truck: ₹100/hr (Ceiling rounded)</td>
+    </tr>
+    <tr>
+      <td><strong>Key Architecture</strong></td>
+      <td>React 19 + Vite &bull; Spring Boot 3 &bull; Spring Data JPA &bull; TiDB MySQL &bull; Docker</td>
+    </tr>
+  </table>
+</div>
+
+<p style="text-align: center; color: #94a3b8; font-size: 11px; margin-top: 20px;">
+  Generated for Nikunj &bull; Smart Vehicle Parking Management System &bull; 2026
+</p>
+
+</body>
+</html>
